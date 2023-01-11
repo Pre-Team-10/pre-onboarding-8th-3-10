@@ -22,6 +22,11 @@
     "prettier/prettier": "error",
     "no-var": "error",
     "multiline-ternary": "error",
-    "react/button-has-type": "off"
+    "react/button-has-type": "off",
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "consistent-return": "off"
   }
 }
