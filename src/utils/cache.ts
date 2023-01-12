@@ -38,10 +38,10 @@ class SickSearchManager implements ISickSearchManager {
   async fetchSearchedSickList(keyword: string) {
     this.requestURL = `${BASE_URL}?q=${keyword}`;
     let searchedSicks = null;
-    console.log("calling api");
     try {
       const cachedSickList = await this.findSearchedSickList();
       if (!cachedSickList) {
+        console.log("calling api");
         await this.saveSearchedSickListInCacheStorage();
         return await this.findSearchedSickList();
       }

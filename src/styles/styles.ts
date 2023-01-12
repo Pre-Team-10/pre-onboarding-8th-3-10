@@ -59,12 +59,10 @@ export const BoldedText = styled.span`
   font-weight: bold;
 `;
 
-export const SickElem = styled.div`
+export const SickElem = styled.div<{ isTargetSick: boolean }>`
   padding: 2.5px 0;
-  &:hover {
-    color: white;
-    ${BoldedText} {
-      color: white;
-    }
-  }
+  background-color: ${({ isTargetSick }) =>
+    isTargetSick ? "rgba(255, 255, 255, 0.2)" : "none"};
+  color: ${({ isTargetSick }) => (isTargetSick ? "white" : "black")};
+  cursor: pointer;
 `;
