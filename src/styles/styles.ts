@@ -54,9 +54,17 @@ export const SicksScrollList = styled.div`
   overflow-y: scroll;
 `;
 
+export const BoldedText = styled.span`
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+`;
+
 export const SickElem = styled.div`
   padding: 2.5px 0;
   &:hover {
     color: white;
+    ${BoldedText} {
+      color: white;
+    }
   }
 `;

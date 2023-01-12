@@ -62,7 +62,7 @@ function SearchPage() {
           <SearchInput ref={inputRef} onChange={handleSearchInputOnChange} />
           <SearchButton>검색</SearchButton>
         </SearchWrapper>
-        {doesSicksExist && <SickList sicks={sicks} />}
+        {doesSicksExist && <SickList sicks={sicks} keyword={keyword} />}
         {keyword && isDebounced && !doesSicksExist && <p>검색어 없음</p>}
       </SearchForm>
     </SearchFormContainer>
