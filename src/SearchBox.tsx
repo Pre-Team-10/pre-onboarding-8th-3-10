@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import getApis from "./Apis";
+import { ISicks, instance } from "./Axios";
 
 const Container = styled.section`
   display: flex;
@@ -32,7 +32,8 @@ const SearchInputWrap = styled.form`
 const SearchInput = styled.input`
   all: unset;
   width: 350px;
-  padding: 5px 5px 5px 20px;
+  padding: 5px 5px 5px 30px;
+  font-size: 17px;
   text-align: left;
 `;
 
@@ -57,15 +58,54 @@ const SearchIconWrap = styled.div`
   align-items: center;
 `;
 
+const ListWrap = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  max-height: 500px;
+  margin: 10px auto;
+  padding: 10px 30px;
+  border-radius: 11px;
+  background-color: #fff;
+  overflow-y: scroll;
+`;
+
+const List = styled.li`
+  padding: 10px 0px;
+  font-size: 17px;
+  text-decoration: none;
+  text-align: left;
+  list-style: none;
+`;
+
 function SearchBox() {
   const [searchText, setSearchText] = useState("");
+  const [sickApiData, setSickApiData] = useState<Array<ISicks>>([]);
+
+  async function getApis(param: string): Promise<ISicks[] | undefined> {
+    const keywordData = {
+      params: {
+        sickNm_like: param,
+      },
+    };
+    try {
+      const response = await instance.get(`?q=`, keywordData);
+      console.log(response.data);
+      setSickApiData(response.data);
+      return [];
+    } catch (error: any) {
+      console.log(error);
+      return [];
+    }
+  }
 
   const handleTextChange = (event: React.FormEvent<HTMLInputElement>) => {
     const {
       currentTarget: { value },
     } = event;
     setSearchText(value);
-    console.log(getApis(searchText));
+    // console.log(getApis(searchText));
+    getApis(searchText);
   };
 
   useEffect(() => {
@@ -104,6 +144,11 @@ function SearchBox() {
             </SearchIconWrap>
           </SearchInputButton>
         </SearchInputWrap>
+        <ListWrap style={{ display: sickApiData ? "flex" : "none" }}>
+          {sickApiData?.map((sickData) => {
+            return <List key={sickData.sickCd}>{sickData.sickNm}</List>;
+          })}
+        </ListWrap>
       </SearchBoxWrap>
     </Container>
   );

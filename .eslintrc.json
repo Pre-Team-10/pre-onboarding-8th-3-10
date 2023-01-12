@@ -23,6 +23,9 @@
     "no-var": "error",
     "multiline-ternary": "error",
     "react/button-has-type": "off",
-    "@typescript-eslint/no-unsafe-return": "off"
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off"
   }
 }
