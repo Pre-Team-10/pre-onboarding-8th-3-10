@@ -13,7 +13,7 @@ const Container = styled.section`
 
 const SearchBoxWrap = styled.div`
   width: 500px;
-  height: 500px;
+  height: 680px;
   margin: 0 auto;
   padding: 80px;
   text-align: center;
@@ -40,8 +40,8 @@ const SearchInput = styled.input`
 const SearchInputButton = styled.button`
   display: flex;
   border-radius: 100%;
-  width: 58px;
-  height: 58px;
+  width: 61px;
+  height: 61px;
   font-weight: 500;
   border: 0;
   cursor: pointer;
@@ -59,7 +59,6 @@ const SearchIconWrap = styled.div`
 `;
 
 const ListWrap = styled.ul`
-  display: flex;
   flex-direction: column;
   width: 350px;
   max-height: 500px;
@@ -73,6 +72,16 @@ const ListWrap = styled.ul`
 const List = styled.li`
   padding: 10px 0px;
   font-size: 17px;
+  font-weight: 300;
+  text-decoration: none;
+  text-align: left;
+  list-style: none;
+`;
+
+const TypeKeyword = styled.li`
+  padding: 10px 0px;
+  font-size: 17px;
+  font-weight: 900;
   text-decoration: none;
   text-align: left;
   list-style: none;
@@ -105,14 +114,20 @@ function SearchBox() {
     } = event;
     setSearchText(value);
     // console.log(getApis(searchText));
-    getApis(searchText);
+    // getApis(searchText);
   };
 
   useEffect(() => {
-    const debounce = setTimeout(() => {
-      console.log("디바운스 입력:", searchText);
-    }, 1000);
+    const debounce = setTimeout(() => {}, 500);
     return () => clearTimeout(debounce);
+  }, [searchText]);
+
+  useEffect(() => {
+    if (searchText) {
+      getApis(searchText);
+    } else {
+      setSearchText("");
+    }
   }, [searchText]);
 
   return (
@@ -144,7 +159,12 @@ function SearchBox() {
             </SearchIconWrap>
           </SearchInputButton>
         </SearchInputWrap>
-        <ListWrap style={{ display: sickApiData ? "flex" : "none" }}>
+        <ListWrap
+          style={{
+            display: searchText.length === 0 ? "none" : "flex",
+          }}
+        >
+          <TypeKeyword>{searchText}</TypeKeyword>
           {sickApiData?.map((sickData) => {
             return <List key={sickData.sickCd}>{sickData.sickNm}</List>;
           })}
