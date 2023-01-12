@@ -15,21 +15,18 @@ enum CacheError {
 
 interface ISickSearchManager {
   fetchSearchedSickList: (keyword: string) => Promise<Array<ISick> | null>;
-  saveSearchedSickListInCacheStorage: () => Promise<void>;
-  findSearchedSickList: () => Promise<Array<ISick> | null>;
-  makeCacheStorage: () => void;
 }
 
 class SickSearchManager implements ISickSearchManager {
-  sickCache: Cache | undefined;
+  private sickCache: Cache | undefined;
 
-  requestURL = "";
+  private requestURL = "";
 
   constructor() {
     this.makeCacheStorage();
   }
 
-  makeCacheStorage() {
+  private makeCacheStorage() {
     window.caches.open(CACHE_NAME).then((cache) => {
       this.sickCache = cache;
     });
@@ -53,7 +50,7 @@ class SickSearchManager implements ISickSearchManager {
     return searchedSicks;
   }
 
-  async saveSearchedSickListInCacheStorage() {
+  private async saveSearchedSickListInCacheStorage() {
     try {
       await this.sickCache?.add(this.requestURL);
     } catch (e) {
@@ -68,7 +65,7 @@ class SickSearchManager implements ISickSearchManager {
     }
   }
 
-  async findSearchedSickList() {
+  private async findSearchedSickList() {
     const cachedResponse = await this.sickCache?.match(this.requestURL);
     if (cachedResponse) {
       const sickList = (await cachedResponse.json()) as Array<ISick>;
