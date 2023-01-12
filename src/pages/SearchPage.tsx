@@ -20,12 +20,6 @@ function SearchPage() {
   const [isDebounced, setIsDebounced] = useState(false);
   const [targetSickIndex, setTargetSickIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleSearchInputOnChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const inputValue = e.currentTarget.value;
-    setKeyword(inputValue);
-  };
   const updateSickListByKeyword = useCallback(
     async (inputValue: string) => {
       if (!inputValue) {
@@ -42,7 +36,7 @@ function SearchPage() {
     [setSicks],
   );
   const handleOnInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (sicks && sicks.length !== 0 && isSickListInitialized) {
+    if (isSickListInitialized && sicks && sicks.length !== 0) {
       const keyCode = e.key || e.keyCode;
       if (
         (keyCode === KeyDownOrder.DOWN_KEY ||
@@ -84,7 +78,7 @@ function SearchPage() {
         <SearchWrapper>
           <SearchInput
             ref={inputRef}
-            onChange={handleSearchInputOnChange}
+            onChange={(e) => setKeyword(e.currentTarget.value)}
             onKeyDown={handleOnInputKeyDown}
           />
           <SearchButton>검색</SearchButton>
