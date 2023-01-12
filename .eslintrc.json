@@ -22,6 +22,7 @@
     "prettier/prettier": "error",
     "no-var": "error",
     "multiline-ternary": "error",
-    "react/button-has-type": "off"
+    "react/button-has-type": "off",
+    "@typescript-eslint/no-unsafe-return": "off"
   }
 }

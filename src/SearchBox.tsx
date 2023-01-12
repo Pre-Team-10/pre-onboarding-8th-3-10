@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import getApis from "./Apis";
 
 const Container = styled.section`
   display: flex;
@@ -64,6 +65,7 @@ function SearchBox() {
       currentTarget: { value },
     } = event;
     setSearchText(value);
+    console.log(getApis(searchText));
   };
 
   useEffect(() => {
