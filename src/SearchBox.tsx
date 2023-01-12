@@ -12,12 +12,11 @@ const Container = styled.section`
 `;
 
 const SearchBoxWrap = styled.div`
-  width: 500px;
+  width: 700px;
   height: 680px;
   margin: 0 auto;
   padding: 80px;
   text-align: center;
-  border: 1px solid #333;
   border-radius: 21px;
 `;
 const SearchInputWrap = styled.form`
@@ -70,12 +69,24 @@ const ListWrap = styled.ul`
 `;
 
 const List = styled.li`
+  position: relative;
   padding: 10px 0px;
   font-size: 17px;
   font-weight: 300;
   text-decoration: none;
   text-align: left;
   list-style: none;
+
+  &:nth-child(2) {
+    padding: 20px 0px 10px;
+  }
+
+  &:nth-child(2)::before {
+    content: "추천 검색어";
+    position: absolute;
+    top: -10px;
+    color: #eee;
+  }
 `;
 
 const TypeKeyword = styled.li`
