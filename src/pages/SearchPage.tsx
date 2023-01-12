@@ -30,7 +30,6 @@ function SearchPage() {
         setSicks([]);
         return;
       }
-      console.log("calling api");
       const searchedSicks = await sickSearchManager.fetchSearchedSickList(
         inputValue,
       );
