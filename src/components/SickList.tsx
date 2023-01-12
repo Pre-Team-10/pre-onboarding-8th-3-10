@@ -1,6 +1,6 @@
 import React from "react";
 import { SickElem, SicksScrollList } from "../styles/styles";
-import { ISick } from "../utils/types";
+import { ISick } from "../utils/cache";
 
 function SickList({ sicks }: { sicks: Array<ISick> }) {
   return (

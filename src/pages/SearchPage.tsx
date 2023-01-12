@@ -9,7 +9,7 @@ import {
   SearchWrapper,
 } from "../styles/styles";
 import { validKeywordRegex } from "../utils/etc";
-import { ISick, sickSearchManager } from "../utils/types";
+import { ISick, sickSearchManager } from "../utils/cache";
 
 let debounceTimeout: NodeJS.Timeout;
 
@@ -24,13 +24,14 @@ function SearchPage() {
     const inputValue = e.currentTarget.value;
     setKeyword(inputValue);
   };
-  const updateSicks = useCallback(
+  const updateSickListByKeyword = useCallback(
     async (inputValue: string) => {
       if (!inputValue) {
         setSicks([]);
         return;
       }
-      const searchedSicks = await sickSearchManager.fetchSearchedSicks(
+      console.log("calling api");
+      const searchedSicks = await sickSearchManager.fetchSearchedSickList(
         inputValue,
       );
       if (searchedSicks) setSicks(searchedSicks);
@@ -48,10 +49,11 @@ function SearchPage() {
     if (isDebounced) {
       if (inputRef.current) {
         const inputKeyword = inputRef.current.value;
-        if (!validKeywordRegex.test(inputKeyword)) updateSicks(inputKeyword);
+        if (!validKeywordRegex.test(inputKeyword))
+          updateSickListByKeyword(inputKeyword);
       }
     }
-  }, [isDebounced, updateSicks]);
+  }, [isDebounced, updateSickListByKeyword]);
   const doesSicksExist = sicks && sicks?.length !== 0;
   return (
     <SearchFormContainer>
@@ -62,7 +64,7 @@ function SearchPage() {
           <SearchButton>검색</SearchButton>
         </SearchWrapper>
         {doesSicksExist && <SickList sicks={sicks} />}
-        {keyword && isDebounced && !doesSicksExist && <p>정보가 없습니다.</p>}
+        {keyword && isDebounced && !doesSicksExist && <p>검색어 없음</p>}
       </SearchForm>
     </SearchFormContainer>
   );
