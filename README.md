@@ -216,7 +216,6 @@ class SickSearchManager implements ISickSearchManager {
 - [x] 직관적인 함수명으로 메소드의 역할을 명확하고 상세하게 알 수 있도록 했습니다.
 - [x] API를 호출할 때 마다 console.info("calling api") 출력을 통해 콘솔창에서 API 호출 횟수 확인이 가능하도록 설정했습니다.
 
-
 ### 2. debouncing을 활용한 API 호출 최적화 전략
 
 ```ts
@@ -242,7 +241,6 @@ useEffect(() => {
 ```
 
 - [x] debouncing의 개념을 활용하여 입력마다 API를 호출하지 않도록 API 호출 횟수를 줄이는 전략 수립 및 실행을 구현했습니다.
-
 
 ### 3. 사용자가 입력한 텍스트와 일치하는 부분 볼드처리
 
@@ -270,7 +268,6 @@ return (
 ```
 
 - [x] 사용자가 검색한 키워드를 기준으로 slice 함수를 사용해 검색 결과를 세 부분으로 분리하여 검색 키워드와 일치하는 중간 부분만 Styled-components를 통해 볼드 처리를 구현했습니다.
-
 
 ### 4. 키보드만으로 추천 검색어들로 이동 가능하도록 구현
 
@@ -322,7 +319,6 @@ export const SickElem = styled.div<{ isTargetSick: boolean }>`
 ```
 
 - [x] 컴포넌트의 state와 리스트의 인덱스값과 그 state값이 일치하는지 여부를 styled-components의 props로 주입하여 키보드를 통한 추천 검색어 이동을 구현했습니다.
-
 
 ### 예외 처리
 
