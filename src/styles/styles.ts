@@ -46,6 +46,9 @@ export const SearchButton = styled.button`
   outline: 1px solid white;
   color: white;
   background-color: blueviolet;
+  overflow: hidden;
+  -webkit-transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
 `;
 
 export const SicksScrollList = styled.div`
