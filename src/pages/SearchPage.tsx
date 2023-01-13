@@ -62,12 +62,10 @@ function SearchPage() {
     return () => clearTimeout(debounceTimeout);
   }, [keyword]);
   useEffect(() => {
-    if (isDebounced) {
-      if (inputRef.current) {
-        const inputKeyword = inputRef.current.value;
-        if (!validKeywordRegex.test(inputKeyword))
-          updateSickListByKeyword(inputKeyword);
-      }
+    if (isDebounced && inputRef.current) {
+      const inputKeyword = inputRef.current.value;
+      if (!validKeywordRegex.test(inputKeyword))
+        updateSickListByKeyword(inputKeyword);
     }
   }, [isDebounced, updateSickListByKeyword]);
   const doesSicksExist = sicks && sicks?.length !== 0;
