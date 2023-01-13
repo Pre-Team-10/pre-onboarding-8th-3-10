@@ -1,16 +1,11 @@
 import { toast } from "react-toastify";
-import { BASE_URL } from "./axios";
+import { BASE_URL, CacheError } from "./etc";
 
 const CACHE_NAME = "sickCache";
 
 export interface ISick {
   sickCd: string;
   sickNm: string;
-}
-
-enum CacheError {
-  QUOTA_EXCEEDED = "QuotaExceededError",
-  DOM = "DOMException",
 }
 
 interface ISickSearchManager {
@@ -36,11 +31,11 @@ class SickSearchManager implements ISickSearchManager {
     this.requestURL = `${BASE_URL}?q=${keyword}`;
     let searchedSicks = null;
     try {
-      const cachedSickList = await this.findSearchedSickList();
+      const cachedSickList = await this.findSearchedSickListInCacheStorage();
       if (!cachedSickList) {
         console.log("calling api");
         await this.saveSearchedSickListInCacheStorage();
-        return await this.findSearchedSickList();
+        return await this.findSearchedSickListInCacheStorage();
       }
       searchedSicks = cachedSickList;
     } catch (e) {
@@ -65,7 +60,7 @@ class SickSearchManager implements ISickSearchManager {
     }
   }
 
-  private async findSearchedSickList() {
+  private async findSearchedSickListInCacheStorage() {
     const cachedResponse = await this.sickCache?.match(this.requestURL);
     if (cachedResponse) {
       const sickList = (await cachedResponse.json()) as Array<ISick>;
