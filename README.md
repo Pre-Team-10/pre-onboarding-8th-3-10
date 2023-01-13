@@ -221,7 +221,9 @@ class SickSearchManager implements ISickSearchManager {
 ```ts
 /*
 먼저 검색 최적화를 수행하기 위해 useEffect의 콜백함수 내부에서 setTimeout을 활용해 debounce 유무의 값을 가지는 state를 변경하도록 하였습니다.
-사용자가 검색창에서 값을 입력하면 useEffect의 콜백함수가 반환하는 cleartimeout 수행 함수를 통해 debounce를 true로 변경하는 timeout을 초기화하였으며, 입력이 없는 경우 true로 변환된 debounce 상태가 다시 밑의 useEffect의 콜백함수를 실행하도록 하여 현재의 검색어에 일치하는 결과를 불러오는 작업을 수행하도록 하였습니다.
+사용자가 검색창에서 값을 입력하면 useEffect의 콜백함수가 반환하는 cleartimeout 수행 함수를 통해 debounce를 true로 변경하는 timeout을 초기화하였습니다.
+만약 더 이상 입력이 없는 경우 true로 변환된 debounce 상태가 다시 밑의 useEffect의 콜백함수를 실행하도록 하여
+현재의 검색어에 일치하는 결과를 불러오는 작업을 수행하도록 하였습니다.
 */
 
 useEffect(() => {
